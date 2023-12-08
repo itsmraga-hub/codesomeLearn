@@ -1,0 +1,11 @@
+D:\RiderProjects\codesome\Shared\bin\Debug\net6.0\codesome.Shared.deps.json
+D:\RiderProjects\codesome\Shared\bin\Debug\net6.0\codesome.Shared.dll
+D:\RiderProjects\codesome\Shared\bin\Debug\net6.0\codesome.Shared.pdb
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\codesome.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\codesome.Shared.AssemblyInfoInputs.cache
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\codesome.Shared.AssemblyInfo.cs
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\codesome.Shared.csproj.CoreCompileInputs.cache
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\codesome.Shared.dll
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\refint\codesome.Shared.dll
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\codesome.Shared.pdb
+D:\RiderProjects\codesome\Shared\obj\Debug\net6.0\ref\codesome.Shared.dll

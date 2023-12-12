@@ -16,8 +16,8 @@ namespace codesome.Shared.Models
         public string UserRoleId { get; set; } = "";
 
         // Foreign key to associate with the user
-        public int UserId { get; set; }
-        public User User { get; set; } = new User();
+        public int CustomUserId { get; set; }
+        public CustomUser CustomUser { get; set; } = new CustomUser();
 
         // Role name (e.g., "Student" or "Instructor")
         public string RoleName { get; set; } = "";

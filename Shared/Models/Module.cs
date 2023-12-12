@@ -18,6 +18,7 @@ namespace codesome.Shared.Models
         public string Description { get; set; } = null!;
 
         // Foreign key to associate with the course
+        [ForeignKey(nameof(Course))]
         public int CourseId { get; set; } = 0;
         public Course Course { get; set; } = new Course();
 

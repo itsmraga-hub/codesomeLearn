@@ -1,0 +1,27 @@
+﻿@page "/create-lesson"
+@using codesome.Shared
+@using codesome.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager _navigator
+
+<h3>Create Course</h3>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" @bind="lesson.Title" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" @bind="lesson.Content" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="startDate" class="form-label">Duration</label>
+            <input type="number" class="form-control" id="duration" @bind="lesson.DurationMinutes" required />
+        </div>
+        <input type="button" class="btn btn-primary" @onclick="CreateLesson" value="Create Lesson" />
+    </form>
+</div>

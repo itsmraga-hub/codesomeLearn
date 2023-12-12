@@ -20,16 +20,60 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/RiderProjects/codesome/Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[D:/RiderProjects/codesome/Client/Pages/Courses/CourseCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VDcmVhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/RiderProjects/codesome/Client/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+[D:/RiderProjects/codesome/Client/Pages/Courses/CoursePage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Courses/Courses.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Enrollments/EnrollmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW5yb2xsbWVudHNcRW5yb2xsbWVudFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Enrollments/Enrollments.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW5yb2xsbWVudHNcRW5yb2xsbWVudHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/RiderProjects/codesome/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Lessons/LessonCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVzc29uc1xMZXNzb25DcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Lessons/LessonPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVzc29uc1xMZXNzb25QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Lessons/Lessons.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVzc29uc1xMZXNzb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Modules/ModuleCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kdWxlc1xNb2R1bGVDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Modules/ModulePage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kdWxlc1xNb2R1bGVQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Modules/Modules.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kdWxlc1xNb2R1bGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Users/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcnNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/RiderProjects/codesome/Client/Pages/Users/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcnNcUmVnaXN0ZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/RiderProjects/codesome/Client/Shared/SurveyPrompt.razor]

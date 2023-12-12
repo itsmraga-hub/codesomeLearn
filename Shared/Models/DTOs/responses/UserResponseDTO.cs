@@ -13,7 +13,7 @@ namespace codesome.Shared.Models.DTOs.responses
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string UserId { get; set; } = string.Empty;
+        public string CustomUserId { get; set; } = string.Empty;
         public string UserName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;

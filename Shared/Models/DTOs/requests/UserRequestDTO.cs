@@ -13,13 +13,15 @@ namespace codesome.Shared.Models.DTOs.requests
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string UserId { get; set; } = string.Empty;
+        public string CustomUserId { get; set; } = string.Empty;
         public string UserName { get; set; } = null!;
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string Phone { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public string Password1 { get; set; } = null!;
-        public DateTime RegistrationDate { get; set; }
+        public string ConfirmPassword { get; set; } = null!;
+        // public DateTime RegistrationDate { get; set; }
 
         // Navigation properties for user roles and enrollments
         public List<UserRole> UserRoles { get; set; } = new List<UserRole>();

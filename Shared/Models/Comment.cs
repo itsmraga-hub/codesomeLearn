@@ -18,11 +18,13 @@ namespace codesome.Shared.Models
         public int Rating { get; set; }
 
         // Navigation properties
+        [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
         public Course Course { get; set; } = new();
 
+        [ForeignKey(nameof(CustomUser))]
         public int userId { get; set; }
-        public User user { get; set; } = new();
+        public CustomUser user { get; set; } = new();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastUpdatedAt { get; set; } = DateTime.Now;

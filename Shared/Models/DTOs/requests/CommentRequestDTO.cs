@@ -22,6 +22,6 @@ namespace codesome.Shared.Models
         public Course Course { get; set; } = new();
 
         public int userId { get; set; }
-        public User user { get; set; } = new();
+        public CustomUser user { get; set; } = new();
     }
 }

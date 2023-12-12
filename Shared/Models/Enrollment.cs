@@ -16,16 +16,19 @@ namespace codesome.Shared.Models
         public string EnrollmentId { get; set; } = null!;
 
         // Foreign key to associate with the user (student)
-        public int UserId { get; set; }
-        public User User { get; set; } = new User();
+        [ForeignKey(nameof(CustomUser))]
+        public int CustomUserId { get; set; }
+        public CustomUser CustomUser { get; set; } = new CustomUser();
 
         // Foreign key to associate with the course
+        [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
         public Course Course { get; set; } = new Course();
 
         public DateTime EnrollmentDate { get; set; } = new DateTime();
 
         // Progress tracking (e.g., which lesson the user is currently on)
+        [ForeignKey(nameof(CurrentLesson))]
         public int CurrentLessonId { get; set; } = 0;
         public Lesson CurrentLesson { get; set; } = new Lesson();
 

@@ -1,0 +1,43 @@
+﻿@page "/create-course"
+@using codesome.Shared
+@using codesome.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager _navigator
+
+<h3>Create Course</h3>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" @bind="course.Title" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" @bind="course.Description" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" @bind="course.StartDate" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="endDate" class="form-label">End Date</label>
+            <input type="date" class="form-control" id="endDate" @bind="course.EndDate" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" @bind="course.Price" required />
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="isPublished" @bind="course.IsPublished" />
+            <label class="form-check-label" for="isPublished">Is Published</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" @onclick="CreateCourse">Create Course</button>
+    </form>
+</div>

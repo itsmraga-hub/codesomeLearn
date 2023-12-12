@@ -1,0 +1,45 @@
+﻿@page "/register"
+@using codesome.Shared
+@using codesome.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager _navigator
+@inject ILocalStorageService _localStorage
+
+<h3>Register</h3>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" @bind="registerModel.FirstName" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" @bind="registerModel.LastName" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" @bind="registerModel.Email" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" @bind="registerModel.Phone" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" @bind="registerModel.Password" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" @bind="registerModel.ConfirmPassword" required />
+        </div>
+
+        @* <button type="submit" class="btn btn-primary" @onclick="RegisterUser">Register</button> *@
+        <input type="button" class="btn btn-primary" @onclick="RegisterUser" value="Login" />
+    </form>
+</div>

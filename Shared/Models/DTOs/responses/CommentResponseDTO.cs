@@ -22,6 +22,6 @@ namespace codesome.Shared.Models.DTOs.responses
         public Course Course { get; set; } = new Course();
 
         public int userId { get; set; }
-        public User user { get; set; } = new User();
+        public CustomUser user { get; set; } = new CustomUser();
     }
 }

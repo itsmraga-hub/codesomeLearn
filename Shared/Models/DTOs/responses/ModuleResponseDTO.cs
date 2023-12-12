@@ -15,9 +15,9 @@ namespace codesome.Shared.Models.DTOs.responses
 
         // Foreign key to associate with the course
         public int CourseId { get; set; } = 0;
-        public Course Course { get; set; } = null!;
+        public CourseResponseDTO Course { get; set; } = new CourseResponseDTO();
 
         // Navigation property for related lessons
-        public List<Lesson> Lessons { get; set; } = new List<Lesson>();
+        public List<LessonResponseDTO> Lessons { get; set; } = new List<LessonResponseDTO>();
     }
 }

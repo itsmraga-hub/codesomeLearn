@@ -16,6 +16,6 @@ namespace codesome.Shared.Models.DTOs.responses
 
         // Foreign key to associate with the module
         public int ModuleId { get; set; } = 0;
-        public Module Module { get; set; } = null!;
+        public ModuleResponseDTO Module { get; set; } = new ModuleResponseDTO();
     }
 }

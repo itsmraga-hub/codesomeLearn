@@ -21,7 +21,7 @@ namespace codesome.Shared.Models
         public Course Course { get; set; } = new();
 
         // Foreign key to associate with the user (student)
-        public int UserId { get; set; }
-        public User User { get; set; } = new();
+        public int CustomUserId { get; set; }
+        public CustomUser CustomUser { get; set; } = new();
     }
 }

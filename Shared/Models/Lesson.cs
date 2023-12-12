@@ -19,6 +19,7 @@ namespace codesome.Shared.Models
         public int DurationMinutes { get; set; } = 0;
 
         // Foreign key to associate with the module
+        [ForeignKey(nameof(Module))]
         public int ModuleId { get; set; } = 0;
         public Module Module { get; set; } = null!;
 

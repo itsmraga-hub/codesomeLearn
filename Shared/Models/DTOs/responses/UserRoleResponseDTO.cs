@@ -16,8 +16,8 @@ namespace codesome.Shared.Models.DTOs.responses
         // public string UserRoleId { get; set; } = string.Empty;
 
         // Foreign key to associate with the user
-        // public int UserId { get; set; }
-        public UserResponseDTO User { get; set; } = new();
+        // public int CustomUserId { get; set; }
+        public UserResponseDTO CustomUser { get; set; } = new();
 
         // Role name (e.g., "Student" or "Instructor")
         public string RoleName { get; set; } = string.Empty;

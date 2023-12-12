@@ -13,7 +13,7 @@ namespace codesome.Shared.Models.DTOs.responses
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string CourseRatingId { get; set; }
+        public string CourseRatingId { get; set; } = "";
         public int Rating { get; set; }
 
         // Foreign key to associate with the course
@@ -21,7 +21,7 @@ namespace codesome.Shared.Models.DTOs.responses
         public Course Course { get; set; } = new();
 
         // Foreign key to associate with the user (student)
-        public int UserId { get; set; }
-        public UserResponseDTO User { get; set; }
+        public int CustomUserId { get; set; }
+        public UserResponseDTO User { get; set; } = new UserResponseDTO();
     }
 }

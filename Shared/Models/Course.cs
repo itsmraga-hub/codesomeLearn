@@ -30,10 +30,13 @@ namespace codesome.Shared.Models
 
         public List<CommentResponseDTO> Comments { get; set; } = new List<CommentResponseDTO>();
 
-        public List<User> Students { get; set;} = new List<User>();
+        // Students
+        public List<CustomUser> Users { get; set;} = new List<CustomUser>();
 
-        public int AuthorID { get; set; } = -1;
-        public User Author { get; set; } = new User();
+        // Course Author
+        [ForeignKey(nameof(CustomUser))]
+        public int CustomUserId { get; set; } = -1;
+        public CustomUser CustomUser { get; set; } = new CustomUser();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastUpdatedAt { get; set; } = DateTime.Now;

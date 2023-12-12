@@ -1,0 +1,35 @@
+﻿@page "/login"
+@using codesome.Shared
+@using codesome.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager _navigator
+@inject ILocalStorageService _localStorage
+@* @inject Snackbar _snackbar *@
+
+
+<h3>Login</h3>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="userName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="userName" @bind="loginModel.UserName" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" @bind="loginModel.Password" required />
+        </div>
+        @* <button type="submit" class="btn btn-primary" @onclick="LoginUser">Login</button> *@
+        <input type="button" class="btn btn-primary" @onclick="LoginUser" value="Login" />
+    </form>
+</div>
+
+<SnackbarStack @ref="_snackbarStack" Location="SnackbarStackLocation.TopEnd" />
+
+
+<Snackbar @ref="_snackbar" AnimationDuration="3000">
+    <SnackbarBody>
+        Login Success
+    </SnackbarBody>
+</Snackbar>

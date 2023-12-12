@@ -11,7 +11,7 @@ namespace codesome.Shared.Models.DTOs.requests
         public int Id { get; set; }
         public string EnrollmentId { get; set; } = null!;
 
-        public User User { get; set; } = new User();
+        public CustomUser CustomUser { get; set; } = new CustomUser();
 
         public Course Course { get; set; } = new Course();
 

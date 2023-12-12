@@ -11,12 +11,12 @@ namespace codesome.Shared.Models.DTOs.responses
         public int Id { get; set; }
         public string EnrollmentId { get; set; } = null!;
 
-        public UserResponseDTO User { get; set; } = new UserResponseDTO();
+        public UserResponseDTO CustomUser { get; set; } = new UserResponseDTO();
 
-        public Course Course { get; set; } = new Course();
+        public CourseResponseDTO Course { get; set; } = new CourseResponseDTO();
 
         public DateTime EnrollmentDate { get; set; } = new DateTime();
 
-        public Lesson CurrentLesson { get; set; } = new Lesson();
+        public LessonResponseDTO CurrentLesson { get; set; } = new LessonResponseDTO();
     }
 }

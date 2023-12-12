@@ -17,12 +17,14 @@ namespace codesome.Shared.Models
         public int Rating { get; set; }
 
         // Foreign key to associate with the course
+        [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
         public Course Course { get; set; } = new();
 
         // Foreign key to associate with the user (student)
-        public int UserId { get; set; }
-        public User User { get; set; } = new User();
+        [ForeignKey(nameof(CustomUser))]
+        public int CustomUserId { get; set; }
+        public CustomUser CustomUser { get; set; } = new CustomUser();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastUpdatedAt { get; set; } = DateTime.Now;

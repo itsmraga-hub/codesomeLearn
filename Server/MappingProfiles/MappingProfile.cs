@@ -14,10 +14,10 @@ namespace codesome.Server.MappingProfiles
             CreateMap<CourseRequestDTO, Course>();
             CreateMap<Course, CourseResponseDTO>();
             CreateMap<CourseResponseDTO, Course>();
-            CreateMap<User, UserResponseDTO>();
-            CreateMap<UserResponseDTO, User>();
-            CreateMap<User, UserRequestDTO>();
-            CreateMap<UserRequestDTO, User>();
+            CreateMap<CustomUser, UserResponseDTO>();
+            CreateMap<UserResponseDTO, CustomUser>();
+            CreateMap<CustomUser, UserRequestDTO>();
+            CreateMap<UserRequestDTO, CustomUser>();
 
             CreateMap<Enrollment, EnrollmentResponseDTO>();
             CreateMap<EnrollmentResponseDTO, Enrollment>();

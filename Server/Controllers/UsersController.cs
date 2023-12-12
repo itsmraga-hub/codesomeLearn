@@ -13,44 +13,48 @@ using Microsoft.AspNetCore.Authorization;
 using System.Linq.Expressions;
 using codesome.Server.Services;
 using codesome.Shared.Models.DTOs.responses;
+using Newtonsoft.Json;
 
 namespace codesome.Server.Controllers
 {
-    [Route("api/[controller]")]
+    // [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly codesomeServerContext _context;
         private readonly IMapper _mapper;
         private readonly IJWTGenerator _jWTGenerator;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(codesomeServerContext context, IMapper mapper, IJWTGenerator jWTGenerator)
+        public UsersController(codesomeServerContext context, IMapper mapper, ILogger<UsersController> logger, IJWTGenerator jWTGenerator)
         {
             _context = context;
             _mapper = mapper;
             _jWTGenerator = jWTGenerator;
+            _logger = logger;
         }
 
         // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        [HttpGet("api/Users")]
+        public async Task<ActionResult<IEnumerable<CustomUser>>> GetUser()
         {
-          if (_context.User == null)
+          if (_context.CustomUser == null)
           {
               return NotFound();
           }
-            return await _context.User.ToListAsync();
+            return await _context.CustomUser.ToListAsync();
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("api/Users/{id}")]
+        public async Task<ActionResult<CustomUser>> GetUser(int id)
         {
-          if (_context.User == null)
+          if (_context.CustomUser == null)
           {
               return NotFound();
           }
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.CustomUser.FindAsync(id);
 
             if (user == null)
             {
@@ -62,7 +66,7 @@ namespace codesome.Server.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("api/Users/{id}")]
         public async Task<IActionResult> PutUser(int id, UserRequestDTO user)
         {
             if (id != user.Id)
@@ -93,35 +97,35 @@ namespace codesome.Server.Controllers
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(UserRequestDTO user)
+        [HttpPost("api/Users")]
+        public async Task<ActionResult<CustomUser>> PostUser(UserRequestDTO user)
         {
-          if (_context.User == null)
+          if (_context.CustomUser == null)
           {
-              return Problem("Entity set 'codesomeServerContext.User'  is null.");
+              return Problem("Entity set 'codesomeServerContext.CustomUser'  is null.");
           }
-            User newUser = new();
-            _context.User.Add(newUser);
+            CustomUser newUser = new();
+            _context.CustomUser.Add(newUser);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id}")]
+        [HttpDelete("api/Users/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            if (_context.User == null)
+            if (_context.CustomUser == null)
             {
                 return NotFound();
             }
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.CustomUser.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.CustomUser.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -134,13 +138,14 @@ namespace codesome.Server.Controllers
             try
             {
                 // CHECK IF USER EXISTS
-                var userexist = await _context.User.FirstOrDefaultAsync(_ => _.PhoneNumber == logindto.UserName || _.Email == logindto.UserName);
-                // var userexist2 = await _context.User.FirstOrDefaultAsync(i => i.Email == logindto.UserName);
+                var userexist = await _context.CustomUser.FirstOrDefaultAsync(_ => _.PhoneNumber == logindto.UserName);
+                // var userexist = await _context.CustomUser.FirstOrDefaultAsync(_ => _.PhoneNumber == logindto.UserName || _.Email == logindto.UserName);
+                // var userexist2 = await _context.CustomUser.FirstOrDefaultAsync(i => i.Email == logindto.UserName);
                 if (userexist == null )
                 {
                     return Ok(new RegistrationLoginReponseDTO()
                     {
-                        Message = "User not found",
+                        Message = "CustomUser not found",
                         StatusCode = "1",
                         Token = "none",
                         UserType = "none"
@@ -152,6 +157,7 @@ namespace codesome.Server.Controllers
                     {
                         //VERIFY PASSWORD
                         bool verified = BCrypt.Net.BCrypt.Verify(logindto.Password, userexist.Password);
+                        
 
                         if (verified)
                         {
@@ -172,7 +178,8 @@ namespace codesome.Server.Controllers
                                     Message = "Login success",
                                     StatusCode = "0",
                                     Token = _jWTGenerator.GetToken(userexist),
-                                    UserType = userexist.UserRoles[0].RoleName,
+                                    // UserType = userexist.UserRoles[0].RoleName,
+                                    UserType = "",
                                     PhoneNumber = userexist.PhoneNumber,
                                     profileImageUrl = userexist.ProfileImage,
                                     userId = userexist.Id,
@@ -224,8 +231,8 @@ namespace codesome.Server.Controllers
             if (ModelState.IsValid)
             {
                 // CHECK IF USER EXISTS
-                Expression<Func<User, bool>> predicate = a => a.PhoneNumber == user.Phone;
-                var userexist = await _context.User.FirstOrDefaultAsync(i => i.PhoneNumber == user.Phone);
+                Expression<Func<CustomUser, bool>> predicate = a => a.PhoneNumber == user.Phone;
+                var userexist = await _context.CustomUser.FirstOrDefaultAsync(i => i.PhoneNumber == user.Phone);
                 if (userexist != null)
                 {
                     return Ok(new RegistrationLoginReponseDTO()
@@ -236,33 +243,50 @@ namespace codesome.Server.Controllers
                     });
                 }
 
-                User userdto = new User();
+                CustomUser userdto = new CustomUser();
                 userdto.FirstName = user.FirstName;
                 userdto.LastName = user.LastName;
+                userdto.UserName = $"{user.FirstName}.{user.LastName}";
                 userdto.Email = user.Email;
                 userdto.PhoneNumber = user.Phone;
                 userdto.CreatedAt = DateTime.Now;
                 userdto.LastUpdatedAt = DateTime.Now;
+                userdto.RegistrationDate = DateTime.Now;
                 // userdto.UserRoles.Add();
                 userdto.Status = true;
                 userdto.ProfileImage = "";
                 // userdto.PrivacyPolicyStatus = true;
                 // userdto.Otp = UtilitiesHelper.GenerateNewCode(4);
 
-                if (user.Password != null)
+                if (user.Password != null && user.ConfirmPassword != null)
                 {
-                    string xhashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                    userdto.Password = xhashedPassword;
+                    if (user.Password == user.ConfirmPassword)
+                    {
+                        string xhashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                        userdto.Password = xhashedPassword;
+
+                        _context.CustomUser.Add(userdto);
+                        await _context.SaveChangesAsync();
+
+                        return Ok(new RegistrationLoginReponseDTO()
+                        {
+                            Message = "Registration Success",
+                            StatusCode = "0",
+                            Token = _jWTGenerator.GetToken(userdto)
+                        });
+                    }
+
+
                 }
 
-                _context.User.Add(userdto);
-                await _context.SaveChangesAsync();
                 return Ok(new RegistrationLoginReponseDTO()
                 {
-                    Message = "Registration Success",
+                    Message = "Registration Failed",
                     StatusCode = "0",
-                    Token = _jWTGenerator.GetToken(userdto)
-                });
+                    // Token = _jWTGenerator.GetToken(userdto)
+                    Token = "none"
+                }); ;
+
             }
             else
             {
@@ -279,7 +303,7 @@ namespace codesome.Server.Controllers
 
         private bool UserExists(int id)
         {
-            return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.CustomUser?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

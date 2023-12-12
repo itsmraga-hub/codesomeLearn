@@ -7,6 +7,11 @@ using codesome.Server.Data;
 using NSwag;
 using System.Text;
 using Asp.Versioning;
+using codesome.Server.Services;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +22,11 @@ var builder = WebApplication.CreateBuilder(args);
 //Jwt configuration starts here
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
+
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["key"]));
+
+
+builder.Services.AddAuthorization();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -120,6 +130,19 @@ builder.Services.AddSwaggerDocument(config =>
         };
     };
 });
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<IJWTGenerator, JWTGenerator>();
+builder.Services.AddScoped<IUserAccessor, UserAccessor>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+builder.Services.AddScoped<IUrlHelper>(x => {
+    var actioncontext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+    var factory = x.GetRequiredService<IUrlHelperFactory>();
+    return factory.GetUrlHelper(actioncontext);
+});
+
 var app = builder.Build();
 
 
@@ -144,6 +167,10 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("AllowAllIPs");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapRazorPages();

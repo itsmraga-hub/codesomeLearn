@@ -28,6 +28,12 @@ namespace codesome.Server.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
@@ -47,6 +53,34 @@ namespace codesome.Server.Migrations
                     b.ToTable("Comment");
                 });
 
+            modelBuilder.Entity("codesome.Shared.Models.CommentResponseDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("text")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("CommentResponseDTO");
+                });
+
             modelBuilder.Entity("codesome.Shared.Models.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -56,6 +90,12 @@ namespace codesome.Server.Migrations
                     b.Property<string>("CourseId")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("CustomUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -67,17 +107,25 @@ namespace codesome.Server.Migrations
                     b.Property<bool>("IsPublished")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomUserId");
 
                     b.ToTable("Course");
                 });
@@ -95,19 +143,53 @@ namespace codesome.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Rating")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("CustomUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomUserId");
 
                     b.ToTable("CourseRating");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CourseRatingResponseDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseRatingId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("CustomUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("CustomUserId");
+
+                    b.ToTable("CourseRatingResponseDTO");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.CourseReview", b =>
@@ -123,20 +205,118 @@ namespace codesome.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("CustomUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("ReviewText")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomUserId");
 
                     b.ToTable("CourseReview");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CourseReviewResponseDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseReviewId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("CustomUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("CustomUserId");
+
+                    b.ToTable("CourseReviewResponseDTO");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CustomUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastLoginDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ProfileImage")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CustomUser");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.Enrollment", b =>
@@ -148,7 +328,13 @@ namespace codesome.Server.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("CurrentLessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EnrollmentDate")
@@ -158,8 +344,8 @@ namespace codesome.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -167,7 +353,7 @@ namespace codesome.Server.Migrations
 
                     b.HasIndex("CurrentLessonId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomUserId");
 
                     b.ToTable("Enrollment");
                 });
@@ -182,8 +368,14 @@ namespace codesome.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DurationMinutes")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("LessonId")
                         .IsRequired()
@@ -212,9 +404,15 @@ namespace codesome.Server.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("ModuleId")
                         .IsRequired()
@@ -231,48 +429,18 @@ namespace codesome.Server.Migrations
                     b.ToTable("Module");
                 });
 
-            modelBuilder.Entity("codesome.Shared.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
-
             modelBuilder.Entity("codesome.Shared.Models.UserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CustomUserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserRoleId")
                         .IsRequired()
@@ -280,7 +448,7 @@ namespace codesome.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomUserId");
 
                     b.ToTable("UserRole");
                 });
@@ -288,12 +456,12 @@ namespace codesome.Server.Migrations
             modelBuilder.Entity("codesome.Shared.Models.Comment", b =>
                 {
                     b.HasOne("codesome.Shared.Models.Course", "Course")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("codesome.Shared.Models.User", "user")
+                    b.HasOne("codesome.Shared.Models.CustomUser", "user")
                         .WithMany()
                         .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -304,7 +472,56 @@ namespace codesome.Server.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("codesome.Shared.Models.CommentResponseDTO", b =>
+                {
+                    b.HasOne("codesome.Shared.Models.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("codesome.Shared.Models.CustomUser", "user")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.Course", b =>
+                {
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
+                        .WithMany("Courses")
+                        .HasForeignKey("CustomUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CustomUser");
+                });
+
             modelBuilder.Entity("codesome.Shared.Models.CourseRating", b =>
+                {
+                    b.HasOne("codesome.Shared.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
+                        .WithMany()
+                        .HasForeignKey("CustomUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("CustomUser");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CourseRatingResponseDTO", b =>
                 {
                     b.HasOne("codesome.Shared.Models.Course", "Course")
                         .WithMany("Ratings")
@@ -312,18 +529,37 @@ namespace codesome.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("codesome.Shared.Models.User", "User")
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CustomUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Course");
 
-                    b.Navigation("User");
+                    b.Navigation("CustomUser");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.CourseReview", b =>
+                {
+                    b.HasOne("codesome.Shared.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
+                        .WithMany()
+                        .HasForeignKey("CustomUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("CustomUser");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CourseReviewResponseDTO", b =>
                 {
                     b.HasOne("codesome.Shared.Models.Course", "Course")
                         .WithMany("CourseReviews")
@@ -331,15 +567,22 @@ namespace codesome.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("codesome.Shared.Models.User", "User")
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CustomUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Course");
 
-                    b.Navigation("User");
+                    b.Navigation("CustomUser");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CustomUser", b =>
+                {
+                    b.HasOne("codesome.Shared.Models.Course", null)
+                        .WithMany("Users")
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.Enrollment", b =>
@@ -356,9 +599,9 @@ namespace codesome.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("codesome.Shared.Models.User", "User")
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
                         .WithMany("Enrollments")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CustomUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -366,7 +609,7 @@ namespace codesome.Server.Migrations
 
                     b.Navigation("CurrentLesson");
 
-                    b.Navigation("User");
+                    b.Navigation("CustomUser");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.Lesson", b =>
@@ -393,13 +636,13 @@ namespace codesome.Server.Migrations
 
             modelBuilder.Entity("codesome.Shared.Models.UserRole", b =>
                 {
-                    b.HasOne("codesome.Shared.Models.User", "User")
+                    b.HasOne("codesome.Shared.Models.CustomUser", "CustomUser")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CustomUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("CustomUser");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.Course", b =>
@@ -411,18 +654,22 @@ namespace codesome.Server.Migrations
                     b.Navigation("Modules");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("codesome.Shared.Models.CustomUser", b =>
+                {
+                    b.Navigation("Courses");
+
+                    b.Navigation("Enrollments");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("codesome.Shared.Models.Module", b =>
                 {
                     b.Navigation("Lessons");
-                });
-
-            modelBuilder.Entity("codesome.Shared.Models.User", b =>
-                {
-                    b.Navigation("Enrollments");
-
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

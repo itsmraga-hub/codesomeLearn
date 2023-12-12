@@ -4,6 +4,6 @@ namespace codesome.Server.Services
 {
     public interface IJWTGenerator
     {
-        string GetToken(User user);
+        string GetToken(CustomUser user);
     }
 }

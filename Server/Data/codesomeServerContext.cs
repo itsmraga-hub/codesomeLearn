@@ -16,7 +16,7 @@ namespace codesome.Server.Data
 
         public DbSet<Course>? Course { get; set; } = default!;
 
-        public DbSet<User>? User { get; set; }
+        public DbSet<CustomUser>? CustomUser { get; set; }
 
         public DbSet<Comment>? Comment { get; set; }
 
@@ -29,5 +29,17 @@ namespace codesome.Server.Data
         public DbSet<CourseRating>? CourseRating { get; set; }
 
         public DbSet<CourseReview>? CourseReview { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+                .HasOne(c => c.CustomUser)      // Course has one CustomUser
+                .WithMany(u => u.Courses)        // CustomUser can have many Courses
+                .HasForeignKey(c => c.CustomUserId);  // Foreign key property in Course entity pointing to CustomUser
+
+            // Other configurations...
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

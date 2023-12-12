@@ -13,7 +13,7 @@ namespace codesome.Server.Services
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["key"]));
         }
-        public string GetToken(User user)
+        public string GetToken(CustomUser user)
         {
             var claims = new List<Claim>();
             claims.Add(new Claim(JwtRegisteredClaimNames.NameId, user.PhoneNumber));

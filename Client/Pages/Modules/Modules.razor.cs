@@ -1,11 +1,11 @@
 ﻿using codesome.Shared.Models;
 
 
-namespace codesome.Client.Pages.Courses
+namespace codesome.Client.Pages.Modules
 {
-    public partial class Courses
+    public partial class Modules
     {
-        private List<Course> courses = new List<Course>();
+        private List<Module> modules = new List<Module>();
 
         protected override async Task OnInitializedAsync()
         {

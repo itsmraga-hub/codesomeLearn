@@ -1,16 +1,16 @@
-﻿@page "/courses"
+﻿@page "/modules"
 @using codesome.Shared
 @using codesome.Shared.Models
 @inject HttpClient Http
 @inject NavigationManager _navigator
 
-<PageTitle>Courses</PageTitle>
+<PageTitle>Modules</PageTitle>
 
-<h1>Courses</h1>
+<h1>Modules</h1>
 
 @* <p>This component demonstrates fetching data from the server.</p> *@
 
-@if (courses == null)
+@if (modules == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -22,21 +22,19 @@ else
                 <th>No</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Price in USD</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Lessons Count</th>
+                <th>Author Name</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var course in courses)
+            @foreach (var module in modules)
             {
                 <tr>
-                    <td>@course.Id</td>
-                    <td>@course.Title</td>
-                    <td>@course.Description</td>
-                    <td>@course.Price</td>
-                    <td>@course.StartDate</td>
-                    <td>@course.EndDate</td>
+                    <td>@module.Id</td>
+                    <td>@module.Title</td>
+                    <td>@module.Description</td>
+                    <td>@module.Lessons.Count</td>
+                    <td>@module.Course.CustomUser.UserName</td>
                 </tr>
             }
         </tbody>

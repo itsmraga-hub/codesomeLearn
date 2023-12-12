@@ -20,7 +20,7 @@ namespace codesome.Client.Pages.Lessons
             // Add logic to handle course creation, e.g., calling a service or API
             // You can access the properties of the 'course' object to get user input
 
-            _navigator.NavigateTo("courses");
+            _navigator.NavigateTo("lessons");
         }
     }
 }

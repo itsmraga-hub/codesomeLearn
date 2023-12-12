@@ -1,10 +1,12 @@
 ﻿using codesome.Shared.Models;
 
-namespace codesome.Client.Pages.Courses
+namespace codesome.Client.Pages.Modules
 {
-    public partial class CoursePage
+    public partial class ModulePage
     {
-        private Course course = new Course();
+        private Module module = new Module();
+
+        private int Id { get; set; }
 
 
         protected override async Task OnInitializedAsync()
@@ -12,13 +14,6 @@ namespace codesome.Client.Pages.Courses
             // courses = await Http<List<Course>>("WeatherForecast");
 
             await base.OnInitializedAsync();
-        }
-
-        private void CourseCreate()
-        {
-            course.CourseId = Guid.NewGuid().ToString();
-            // Add logic to handle course creation, e.g., calling a service or API
-            // You can access the properties of the 'course' object to get user input
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using codesome.Shared.Models;
 
-namespace codesome.Client.Pages.Courses
+namespace codesome.Client.Pages.Modules
 {
-    public partial class CourseCreate
+    public partial class ModuleCreate
     {
-        private Course course = new Course();
+        private Module module = new Module();
 
 
         protected override async Task OnInitializedAsync()
@@ -14,13 +14,13 @@ namespace codesome.Client.Pages.Courses
             await base.OnInitializedAsync();
         }
 
-        private void CreateCourse()
+        private void CreateModule()
         {
 
             // Add logic to handle course creation, e.g., calling a service or API
             // You can access the properties of the 'course' object to get user input
 
-            _navigator.NavigateTo("courses");
+            _navigator.NavigateTo("modules");
         }
     }
 }

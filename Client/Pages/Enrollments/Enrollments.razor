@@ -5,9 +5,39 @@
 @inject NavigationManager _navigator
 @inject ILocalStorageService _localStorage
 
+<PageTitle>Enrollments</PageTitle>
 
-<h3>Enrollments</h3>
+<h1>Enrollments</h1>
 
-@code {
+@* <p>This component demonstrates fetching data from the server.</p> *@
 
+@if (enrollments == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Enrollment Date</th>
+                <th>Current Lesson</th>
+                <th>Course Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in enrollments)
+            {
+                <tr>
+                    <td>@enrollment.Id</td>
+                    <td>@enrollment.Course.Title</td>
+                    <td>@enrollment.EnrollmentDate</td>
+                    <td>@enrollment.CurrentLesson</td>                    
+                    <td>@enrollment.CustomUser.UserName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
